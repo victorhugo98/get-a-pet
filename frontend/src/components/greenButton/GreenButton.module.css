@@ -1,0 +1,22 @@
+.button {
+  border-radius: 8px;
+  background-color: #25b456;
+  color: #fff;
+  border: none;
+  min-width: 100px;
+  min-height: 2.5rem;
+  width: 100%;
+  cursor: pointer;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 0.4rem;
+  margin-bottom: 0.4rem;
+}
+.button:hover {
+  background-color: #0c7330;
+}
+
+.button:disabled {
+  background-color: #8be0a9;
+  cursor: progress;
+}

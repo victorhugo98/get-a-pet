@@ -1,0 +1,38 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--yellow);
+  padding: 1rem 1.5rem;
+  color: var(--blue);
+}
+.list {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 0.8rem;
+}
+.header img {
+  width: 70px;
+}
+.header ul li a {
+  display: block;
+  padding: 0.5rem 0.8rem;
+  border-radius: 4px;
+}
+.header ul li,
+a {
+  transition: 0.4s;
+}
+a {
+  text-decoration: none;
+  color: var(--blue);
+}
+ul li:hover {
+  background-color: var(--blue);
+  cursor: pointer;
+}
+
+ul li:hover a {
+  color: #fff;
+}

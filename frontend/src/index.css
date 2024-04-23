@@ -1,0 +1,39 @@
+:root {
+  --yellow: #ffd400;
+  --blue: #16479d;
+  --white: #eee;
+  --black: #444;
+  --grey: #666;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+h1 {
+  color: var(--blue);
+  margin-bottom: 1rem;
+  font-size: 2.1rem;
+}
+.bold {
+  font-weight: bold;
+  color: var(--blue);
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+ul,
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+
+a.active {
+  color: #fff;
+  background-color: var(--blue);
+}
