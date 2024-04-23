@@ -7,7 +7,7 @@ import useForm from "../../../hooks/useForm/useForm";
 import GreenButton from "../../greenButton/GreenButton";
 import { CHECK_USER, UPDATE_USER } from "../../../utils/api/api";
 import useFetch from "../../../hooks/useForm/useFetch";
-
+import UserProfileSkeleton from "./UserProfileSkeleton";
 
 const UserProfile = () => {
   const formData = new FormData();
@@ -49,7 +49,7 @@ const UserProfile = () => {
     async function getUserData() {
       const token = localStorage.token;
       const { url, options } = CHECK_USER(token);
-      const userData = await requestProfileData(url, options);
+      await requestProfileData(url, options);
     }
     getUserData();
   }, [requestProfileData]);
@@ -101,59 +101,61 @@ const UserProfile = () => {
     handleValidatePassword();
   }, [handleValidatePassword]);
 
-  return (
-    <form className={styles.form} onSubmit={handleSubmit}>
-      <h1>Editar</h1>
-      {preview ? (
-        <RoundedImage src={preview} />
-      ) : (
-        <img src={NoProfilePicture} alt="Foto de perfil" />
-      )}
+  if (loadingProfileData) return <UserProfileSkeleton />;
+  if (userProfileData)
+    return (
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <h1>Editar</h1>
+        {preview ? (
+          <RoundedImage src={preview} />
+        ) : (
+          <img src={NoProfilePicture} alt="Foto de perfil" />
+        )}
 
-      <Input type="file" id="image" onChange={handleFileChange} />
-      <div>
+        {}
+        <Input type="file" id="image" onChange={handleFileChange} />
 
-      </div>
-      <Input
-        label="Nome"
-        id="name"
-        type="text"
-        placeholder="Digite o nome"
-        {...name}
-      />
-      <Input
-        label="Email"
-        id="email"
-        type="text"
-        placeholder="Digite a email"
-        {...email}
-      />
-      <Input
-        label="Telefone"
-        id="phone"
-        type="text"
-        placeholder="(00)00000-0000"
-        {...phone}
-      />
-      <Input
-        label="Senha"
-        id="password"
-        type="password"
-        placeholder="Digite a senha"
-        {...password}
-      />
-      <Input
-        label="Confirmar senha"
-        id="confirmPassword"
-        type="password"
-        placeholder="Confirme a senha"
-        {...confirmPassword}
-      />
-      <GreenButton disabled={loadingProfileData ? true : false}>
-        Editar
-      </GreenButton>
-    </form>
-  );
+        <Input
+          label="Nome"
+          id="name"
+          type="text"
+          placeholder="Digite o nome"
+          {...name}
+        />
+
+        <Input
+          label="Email"
+          id="email"
+          type="text"
+          placeholder="Digite a email"
+          {...email}
+        />
+        <Input
+          label="Telefone"
+          id="phone"
+          type="text"
+          placeholder="(00)00000-0000"
+          {...phone}
+        />
+        <Input
+          label="Senha"
+          id="password"
+          type="password"
+          placeholder="Digite a senha"
+          {...password}
+        />
+        <Input
+          label="Confirmar senha"
+          id="confirmPassword"
+          type="password"
+          placeholder="Confirme a senha"
+          {...confirmPassword}
+        />
+        <GreenButton disabled={updateUser.loading ? true : false}>
+          Editar
+        </GreenButton>
+      </form>
+    );
 };
 
 export default UserProfile;

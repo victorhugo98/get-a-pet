@@ -20,7 +20,6 @@ const Register = () => {
   function handleChange(e) {
     setUser({ ...user, [e.target.id]: e.target.value });
   }
-
   async function handleSubmit(e) {
     e.preventDefault();
     if (

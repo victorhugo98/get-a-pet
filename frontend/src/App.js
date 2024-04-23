@@ -7,9 +7,9 @@ import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import Register from "./components/pages/Auth/Register";
 import Container from "./components/container/Container";
+import UserProfile from "./components/pages/UserProfile/UserProfile";
 
 import { UserContext } from "./context/UserContext";
-import UserProfile from "./components/pages/UserProfile/UserProfile";
 function App() {
   return (
     <BrowserRouter>

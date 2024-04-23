@@ -4,6 +4,7 @@
   --white: #eee;
   --black: #444;
   --grey: #666;
+  --inputWidth: 300px;
 }
 
 * {
