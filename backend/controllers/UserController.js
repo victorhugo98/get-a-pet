@@ -111,7 +111,7 @@ module.exports = class UserController {
   static async edit(req, res) {
     const { name, email, phone, password, confirmPassword } = req.body;
     const user = await getUserByToken(req, res);
-
+    console.log(password, confirmPassword);
     let image = "";
 
     if (req.file) {
@@ -133,7 +133,7 @@ module.exports = class UserController {
       return;
     }
 
-    if (password && confirmPassword && password !== confirmPassword) {
+    if (password !== confirmPassword) {
       res.status(422).json({ message: "As senhas devem coincidir" });
       return;
     }
@@ -143,23 +143,22 @@ module.exports = class UserController {
     if (email !== user.email && userExists) {
       res.status(422).json({ message: "Usuário já cadastrado" });
       return;
-    } else if (password !== confirmPassword && password !== null) {
+    }
+    if (password !== '' && password === confirmPassword) {
       const passwordHash = await bcrypt.hash(password, 12);
       user.password = passwordHash;
     }
+
     user.name = name;
     user.email = email;
     user.phone = phone;
-    user.image = image;
+    if (image) user.image = image;
 
     try {
-      await User.findByIdAndUpdate(
-        { _id: user._id },
-        { $set: user },
-        { new: true }
-      );
+      await User.findByIdAndUpdate({ _id: user._id }, { $set: user });
       res.status(200).json({ message: "Usuário atualizado com sucesso!" });
     } catch (error) {
+      console.log(error);
       res.status(500).json({
         message: "Algum erro aconteceu, tente novamente mais tarde.",
         error,

@@ -64,7 +64,7 @@ const UserProfile = () => {
     formData.append("email", email.value);
     formData.append("phone", phone.value);
     formData.append("password", password.value);
-    formData.append("confirmPassoword", confirmPassword.value);
+    formData.append("confirmPassword", confirmPassword.value);
 
     if (!password.value && !confirmPassword.value) {
       if (name.validate() && email.validate() && phone.validate()) {
