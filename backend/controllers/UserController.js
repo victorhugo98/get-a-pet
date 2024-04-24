@@ -144,7 +144,7 @@ module.exports = class UserController {
       res.status(422).json({ message: "Usuário já cadastrado" });
       return;
     }
-    if (password !== '' && password === confirmPassword) {
+    if (password !== "" && password === confirmPassword) {
       const passwordHash = await bcrypt.hash(password, 12);
       user.password = passwordHash;
     }
@@ -156,12 +156,14 @@ module.exports = class UserController {
 
     try {
       await User.findByIdAndUpdate({ _id: user._id }, { $set: user });
-      res.status(200).json({ message: "Usuário atualizado com sucesso!" });
+      res
+        .status(200)
+        .json({ message: "Usuário atualizado com sucesso!", ok: true });
     } catch (error) {
-      console.log(error);
       res.status(500).json({
         message: "Algum erro aconteceu, tente novamente mais tarde.",
         error,
+        ok: false,
       });
     }
   }

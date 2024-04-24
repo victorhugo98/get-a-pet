@@ -8,6 +8,8 @@ import GreenButton from "../../greenButton/GreenButton";
 import { CHECK_USER, UPDATE_USER } from "../../../utils/api/api";
 import useFetch from "../../../hooks/useForm/useFetch";
 import UserProfileSkeleton from "./UserProfileSkeleton";
+import SuccessMessage from "../../successMessage/SuccessMessage";
+import Error from "../../error/Error";
 
 const UserProfile = () => {
   const formData = new FormData();
@@ -112,9 +114,7 @@ const UserProfile = () => {
           <img src={NoProfilePicture} alt="Foto de perfil" />
         )}
 
-        {}
         <Input type="file" id="image" onChange={handleFileChange} />
-
         <Input
           label="Nome"
           id="name"
@@ -122,7 +122,6 @@ const UserProfile = () => {
           placeholder="Digite o nome"
           {...name}
         />
-
         <Input
           label="Email"
           id="email"
@@ -154,6 +153,14 @@ const UserProfile = () => {
         <GreenButton disabled={updateUser.loading ? true : false}>
           Editar
         </GreenButton>
+
+        {updateUser.data && updateUser.data.ok ? (
+          <SuccessMessage>{updateUser.data.message}</SuccessMessage>
+        ) : null}
+
+        {updateUser.data && !updateUser.data.ok ? (
+          <Error>{updateUser.data.message}</Error>
+        ) : null}
       </form>
     );
 };

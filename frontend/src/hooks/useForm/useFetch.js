@@ -13,7 +13,6 @@ const useFetch = () => {
       const data = await fetch(url, options);
       const json = await data.json();
       setData(json);
-      setLoading(null);
     } catch (err) {
       setError(err);
     } finally {
